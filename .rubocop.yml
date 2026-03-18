@@ -1,0 +1,43 @@
+# Omakase Ruby styling for Rails
+inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+
+require:
+  - rubocop-rails
+  - rubocop-performance
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - "bin/**/*"
+    - "db/schema.rb"
+    - "vendor/**/*"
+    - "node_modules/**/*"
+
+# Enforce the 2-space indentation you requested
+Layout/IndentationStyle:
+  EnforcedStyle: spaces
+
+Layout/IndentationWidth:
+  Width: 2
+
+# Security & Style for Rails
+Rails:
+  Enabled: true
+
+# Use the Ruby-standard "Double Quotes" for strings (or change to 'single_quotes')
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+# Avoid complex methods to keep code Object-Oriented and readable
+Metrics/MethodLength:
+  Max: 15
+  Exclude:
+    - "db/migrate/*.rb"
+
+# Ensure hash syntax is modern { key: value }
+Style/HashSyntax:
+  EnforcedStyle: ruby19
+
+# Allow documented "Self" for better readability in Service Objects
+Style/SelfAssignment:
+  Enabled: true
