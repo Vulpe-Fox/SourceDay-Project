@@ -5,13 +5,15 @@ class OauthController < ApplicationController
   def connect
     # Generate state
     #   SecureRandom adds a second layer to protect_from_forgery for CSRF
-    state = SecureRandom.hex(24)
+    state = SecureRandom.hex(16)
     session[:oauth_state] = state
 
     # Desired scopes (as a test, in practice use least privelege)
-    scopes = [ "data:read", "task:add" ]
+    scopes = [ "data:read_write" ]
 
-    redirect_to @service.authorize_url(state, scopes), allow_other_host: true
+    url = @service.authorize_url(state, scopes)
+
+    redirect_to url, allow_other_host: true
   end
 
   # Step 2,3: in auth flow using callback
@@ -46,7 +48,7 @@ class OauthController < ApplicationController
 
   private
   def set_service
-    @service = AuthService.new
+    @service = Todoist::AuthService.new
   end
 
   def handle_oauth_error(error_type)

@@ -17,6 +17,12 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
-    redirect_to login_path, alert: t("sessions.login_required") unless current_user
+    redirect_to root_path, alert: t("sessions.login_required") unless current_user
+  end
+
+  protected
+
+  def after_sign_in_path_for(resource)
+    root_path
   end
 end
