@@ -28,4 +28,16 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  sessions:
+    login_required: "Please sign in first."
+    state_mismatch: "State does not match."
+    logged_out_success: "Logged out successfully."
+    developer_no_users: "No users found in database."
+  todoist_access_response:
+    success: "Successfully connected to Todoist."
+    failure: "Failed to save Todoist connection."
+  todoist_token_validation:
+    no_token: "Please connect your Todoist account first."
+  todoist_task_create_response:
+    success: "Task created successfully."
+    empty: "Task content cannot be blank."

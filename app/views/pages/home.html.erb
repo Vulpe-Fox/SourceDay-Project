@@ -1,2 +1,48 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div style="text-align: center; margin-top: 50px;">
+  <h1>Welcome!</h1>
+  <p style="font-size: 1.2rem; color: #666;">
+  </p>
+
+  <div style="margin-top: 30px;">
+    <% if current_user %>
+      <% if current_user.todoist_access_token.present? %>
+        <div style="background: #e8f5e9; padding: 20px; border-radius: 8px; display: inline-block;">
+          <p style="color: #2e7d32; font-weight: bold; margin-bottom: 20px;">
+            Your Todoist account is successfully connected!
+          </p>
+          <%= link_to "View My Tasks", tasks_path, 
+              style: "background: #2ecc71; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;" %>
+        </div>
+      <% else %>
+        <p>Link your account to get started.</p>
+        <%= link_to "Connect to Todoist", todoist_connect_path, 
+            style: "background: #e44332; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;" %>
+      <% end %>
+    <% else %>
+      <p>Please use the <strong>Dev Login</strong> in the navigation bar to begin.</p>
+    <% end %>
+  </div>
+
+  <div class="card" style="padding: 20px;">
+    <h3>Todoist Integration</h3>
+
+    <% if current_user.todoist_access_token.present? %>
+      <p style="color: #2e7d32;">
+        <strong>Status:</strong> Connected 
+        <span style="font-size: 0.8rem; color: #666;">(Token present)</span>
+      </p>
+      
+      <p>Need to refresh your permissions or fix a connection error?</p>
+      <%= link_to "Reconnect Todoist", todoist_connect_path, 
+          class: "button", 
+          style: "background: #777; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block;" %>
+    <% else %>
+      <p style="color: #d32f2f;"><strong>Status:</strong> Not Connected</p>
+      <p>Link your account to start pulling in your tasks.</p>
+      <%= link_to "Connect Todoist", todoist_connect_path, 
+          class: "button", 
+          style: "background: #e44332; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;" %>
+    <% end %>
+  </div>
+</div>
+

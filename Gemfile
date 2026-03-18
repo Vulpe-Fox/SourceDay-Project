@@ -63,8 +63,8 @@ group :development, :test do
   gem "webmock"           # mock API calls
 
   # binding pry
-  gem 'pry'
-  gem 'pry-byebug'
+  gem "pry"
+  gem "pry-byebug"
 end
 
 group :development do

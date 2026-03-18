@@ -1,0 +1,38 @@
+<div class="container">
+  <h1>Todoist Tasks</h1>
+
+  <section style="margin-bottom: 20px; padding: 15px; border: 1px solid #ddd;">
+  <h3>Create New Task</h3>
+  <%= form_with url: tasks_path, method: :post do |f| %>
+    <div>
+    <%= f.label :content, "What needs to be done?" %>
+    <%= f.text_field :content, placeholder: "e.g., Finish the Allen's Briefing", required: true %>
+    <%= f.submit "Add Task" %>
+    </div>
+  <% end %>
+  </section>
+
+  <hr>
+  <table>
+    <thead>
+      <tr>
+        <th>Task Content</th>
+        <th>Due Date</th>
+        <th>Priority</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @tasks.any? %>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td><%= task["content"] %></td>
+          <td><%= task.dig("deadline", "string") || "No date" %></td>
+          <td>Priority <%= task["priority"] %></td>
+        </tr>
+      <% end %>
+      <% else %>
+      <tr><td colspan="3">No tasks found.</td></tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
