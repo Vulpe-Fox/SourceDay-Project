@@ -1,0 +1,15 @@
+
+[1mFrom:[0m /mnt/c/Users/camer/Desktop/takehomeproject/sourcedayproject/spec/requests/oauth_spec.rb:31 :
+
+    [1;34m26[0m: 
+    [1;34m27[0m:         get [31m[1;31m"[0m[31m/auth/todoist/callback[1;31m"[0m[31m[0m, [35mparams[0m: { [35mcode[0m: [31m[1;31m"[0m[31m123[1;31m"[0m[31m[0m, [35mstate[0m: state }
+    [1;34m28[0m:         
+    [1;34m29[0m:         user.reload
+    [1;34m30[0m:         binding.pry
+ => [1;34m31[0m:         expect(user.todoist_access_token).to eq([31m[1;31m"[0m[31mnew_todoist_token_123[1;31m"[0m[31m[0m)
+    [1;34m32[0m:         expect(response).to redirect_to([31m[1;31m"[0m[31m/dashboard[1;31m"[0m[31m[0m)
+    [1;34m33[0m:       [32mend[0m
+    [1;34m34[0m:     [32mend[0m
+    [1;34m35[0m:   [32mend[0m
+    [1;34m36[0m: [32mend[0m
+
