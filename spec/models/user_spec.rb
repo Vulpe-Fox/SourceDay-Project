@@ -16,7 +16,6 @@ RSpec.describe User, type: :model do
     it "encrypts the todoist_access_token" do
       token = "secret_123"
       user.update(todoist_access_token: token)
-      
       expect(user.todoist_access_token).to eq(token)
       expect(User.where(todoist_access_token: token)).to_not exist
     end

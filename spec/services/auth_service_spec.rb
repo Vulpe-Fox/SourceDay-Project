@@ -27,7 +27,7 @@ RSpec.describe AuthService do
     it "raises a StandardError on failure" do
       stub_request(:post, "https://api.todoist.com/oauth/access_token")
         .to_return(
-          status: 400, 
+          status: 400,
           body: { error: "bad_authorization_code" }.to_json,
           headers: { "Content-Type" => "application/json" }
         )

@@ -1,23 +1,23 @@
 class AuthService
   include HTTParty
-  base_uri 'https://api.todoist.com/oauth'
+  base_uri "https://api.todoist.com/oauth"
 
   # keep development keys out of git
   AUTH_URL = "https://todoist.com/oauth/authorize"
   TOKEN_URL = "https://api.todoist.com/oauth/access_token"
 
   def initialize
-    @client_id = ENV['TODOIST_CLIENT_ID']
-    @client_secret = ENV['TODOIST_CLIENT_SECRET']
+    @client_id = ENV["TODOIST_CLIENT_ID"]
+    @client_secret = ENV["TODOIST_CLIENT_SECRET"]
   end
 
   # generate auth url (step 1 in auth flow)
   def authorize_url(state, scopes = [])
     params = {
       client_id: @client_id,
-      scope: scopes.join(','),
+      scope: scopes.join(","),
       state: state,
-      response_type: 'code'
+      response_type: "code"
     }
     "#{AUTH_URL}?#{params.to_query}"
   end
@@ -43,11 +43,10 @@ class AuthService
         client_id: @client_id,
         client_secret: @client_secret,
         token: access_token,
-        token_type_hint: 'access_token' # optional - RFC7009
+        token_type_hint: "access_token" # optional - RFC7009
       }
     }
-    
-    response = self.class.post('/access_token/revoke', options)
+    response = self.class.post("/access_token/revoke", options)
     response.success?
   end
 
@@ -58,11 +57,11 @@ class AuthService
         client_id: @client_id,
         client_secret: @client_secret,
         personal_token: personal_token,
-        scope: scopes.join(',')
+        scope: scopes.join(",")
       }
     }
 
-    response = self.class.post('/access_token/migrate', options)
+    response = self.class.post("/access_token/migrate", options)
     handle_response(response, "Migration failed")
   end
 

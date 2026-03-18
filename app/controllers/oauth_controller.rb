@@ -45,7 +45,6 @@ class OauthController < ApplicationController
   end
 
   private
-  
   def set_service
     @service = AuthService.new
   end
