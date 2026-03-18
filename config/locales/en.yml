@@ -28,4 +28,9 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  sessions:
+    login_required: "Please sign in first."
+    state_mismatch: "State does not match."
+  todoist_access_response:
+    success: "Successfully connected to Todoist."
+    failure: "Failed to save Todoist connection."

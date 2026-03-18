@@ -17,6 +17,6 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
-    redirect_to login_path, alert: "Please sign in first." unless current_user
+    redirect_to login_path, alert: t("sessions.login_required") unless current_user
   end
 end

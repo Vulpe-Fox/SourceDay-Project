@@ -18,10 +18,10 @@ class OauthController < ApplicationController
   def callback
     # Match state for verification
     if params[:state].blank? || params[:state] != session[:oauth_state]
-      return redirect_to root_path, alert: "Security Error: State mismatch."
+      return redirect_to root_path, alert: t("sessions.state_mismatch")
     end
 
-    # Remove old session state after verification to avoid 
+    # Remove old session state after verification to avoid
     #   code injection retrieval and replay attacks
     session.delete(:oauth_state)
 
@@ -33,12 +33,11 @@ class OauthController < ApplicationController
     # Exchange code for token
     begin
       result = @service.exchange_code(params[:code])
-      
       # Save to user model
       if current_user.update!(todoist_access_token: result["access_token"])
-        redirect_to dashboard_path, notice: "Successfully connected to Todoist."
+        redirect_to dashboard_path, notice: t("todoist_access_response.success")
       else
-        redirect_to root_path, alert: "Failed to save Todoist connection."
+        redirect_to root_path, alert: t("todoist_access_response.failure")
       end
     rescue => e
       redirect_to root_path, alert: "Authentication failed: #{e.message}"
