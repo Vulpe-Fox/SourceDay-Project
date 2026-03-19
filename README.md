@@ -43,18 +43,18 @@ bin/rails db:test:prepare
 
 4. Setup Todoist Configuration and Projects
 
-&emsp;&emsp;4a. Create a Todoist account
+&nbsp;&nbsp;4a. Create a Todoist account
 
-&emsp;&emsp;4b. Navigate to Settings > Integrations > Developer > App management and create a new application
+&nbsp;&nbsp;4b. Navigate to Settings > Integrations > Developer > App management and create a new application
 
-&emsp;&emsp;4c. Transfer client id, secret, and verification token to a .env file as:
+&nbsp;&nbsp;4c. Transfer client id, secret, and verification token to a .env file as:
 TODOIST_CLIENT_ID={client id}
 TODOIST_CLIENT_SECRET={client secret}
 TODOIST_VERIFICATION_TOKEN={verification token}
 
-&emsp;&emsp;4d. Set TODOIST_REDIRECT_URI in .env to http://localhost:3000/auth/todoist/callback, and copy that link into Todoist application OAuth redirect URL
+&nbsp;&nbsp;4d. Set TODOIST_REDIRECT_URI in .env to http://localhost:3000/auth/todoist/callback, and copy that link into Todoist application OAuth redirect URL
 
-&emsp;&emsp;4e. Create a new Todoist project named Development Tasks
+&nbsp;&nbsp;4e. Create a new Todoist project named Development Tasks
 
 5. Run initial tests using rspec for sanity check
 ```bash
@@ -86,7 +86,7 @@ User.create!(
 
 11. Follow through the OAuth authorization flow
 
-12. In the top left, click on My Tasks, you may not add tasks via the view
+12. In the top left, click on My Tasks, you may now add tasks via the view
 
 13. Should you need to reauthenticate or change scopes, the home menu has an option to reconnect Todoist
 
