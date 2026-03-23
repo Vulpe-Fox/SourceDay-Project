@@ -48,7 +48,7 @@ class TasksController < ApplicationController
 
   def ensure_todoist_token
     if current_user.todoist_access_token.blank?
-      redirect_to oauth_connect_path, alert: t("todoist_token_validation.no_token")
+      redirect_to todoist_connect_path, alert: t("todoist_token_validation.no_token")
     end
   end
 end

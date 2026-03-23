@@ -1,34 +1,32 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe "OAuth Flow", type: :request do
+RSpec.describe "Todoist OAuth Flow", type: :request do
   let(:user) { create(:user) }
 
-  describe "GET /auth/todoist/callback" do
-    let(:state) { "secure_random_state" }
+  before do
+    sign_in(user)
+  end
 
-    context "when authorization is successful" do
-      before do
-        # Sign in the user (assuming you use Devise or similar)
-        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-        # Mock the service response
-        allow_any_instance_of(AuthService).to receive(:exchange_code).and_return({
-          "access_token" => "new_todoist_token_123"
-        })
-      end
+  describe "Full OAuth Handshake" do
+    it "successfully links Todoist account" do
+      # 1. Start connection using the named helper :todoist_connect
+      get todoist_connect_path
 
-      it "updates the user with the new access token" do
-        sign_in(user)
+      expect(response).to have_http_status(:redirect)
+      expect(response.location).to include("todoist.com/oauth/authorize")
 
-        allow_any_instance_of(ActionController::Base).to receive(:session).and_return({
-          user_id: user.id,
-          oauth_state: state
-        }.with_indifferent_access)
+      stored_state = session[:oauth_state]
+      expect(stored_state).not_to be_nil
 
-        get "/auth/todoist/callback", params: { code: "123", state: state }
-        user.reload
-        expect(user.todoist_access_token).to eq("new_todoist_token_123")
-        expect(response).to redirect_to("/dashboard")
-      end
+      # 2. Mock the service's exchange_code method
+      auth_result = { "access_token" => "at_12345" }
+      allow_any_instance_of(Todoist::AuthService).to receive(:exchange_code).and_return(auth_result)
+
+      # 3. Simulate callback from Todoist using the auto-generated helper
+      get auth_todoist_callback_path, params: { state: stored_state, code: "auth_code_abc" }
+
+      expect(response).to redirect_to(tasks_path)
+      expect(user.reload.todoist_access_token).to eq("at_12345")
     end
   end
 end

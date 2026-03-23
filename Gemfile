@@ -76,6 +76,9 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+  gem "rails-controller-testing"
+  gem "shoulda-matchers", "~> 6.0"
+  gem "webmock"
 end
 
 gem "httparty", "~> 0.24.2"

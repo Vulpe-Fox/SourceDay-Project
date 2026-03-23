@@ -12,7 +12,7 @@ module Todoist
 
     def retrieve_all_tasks
       response = self.class.get("/tasks", headers: @headers)
-      if response.success? && response.parsed_response.is_a?(Array)
+      if response.success? && response.parsed_response.is_a?(Hash)
         response.parsed_response["results"]
       else
         []
@@ -22,7 +22,7 @@ module Todoist
     def retrieve_all_tasks_from_project(project_id)
       return [] if project_id.blank?
       response = self.class.get("/tasks", query: { project_id: project_id }, headers: @headers)
-      response.success? ? response.parsed_response["results"] : []
+      response.success? && response.parsed_response.is_a?(Hash) ? response.parsed_response["results"] : []
     end
 
     def create_task(attributes = {})
@@ -34,18 +34,11 @@ module Todoist
     end
 
     def find_project_id_by_name(name)
-      response = self.class.get(
-        "/projects/search",
-        query: { query: name },
-        headers: @headers
-      )
-      if response.success?
+      response = self.class.get("/projects/search", query: { query: name }, headers: @headers)
+
+      if response.success? && response.parsed_response.is_a?(Hash)
         items = response.parsed_response["results"]
-        if items.is_a?(Array) && items.any?
-          items.first["id"]
-        else
-          nil
-        end
+        (items.is_a?(Array) && items.any?) ? items.first["id"] : nil
       else
         nil
       end
