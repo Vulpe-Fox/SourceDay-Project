@@ -38,7 +38,7 @@ RSpec.describe "pages/home", type: :view do
       render
       expect(rendered).to have_content("Your Todoist account is successfully connected!")
       expect(rendered).to have_link("View My Tasks", href: tasks_path)
-      
+
       expect(rendered).to have_content("Status: Connected")
       expect(rendered).to have_link("Reconnect Todoist", href: todoist_connect_path)
     end

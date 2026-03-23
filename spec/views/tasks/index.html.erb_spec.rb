@@ -3,15 +3,15 @@ require 'rails_helper'
 RSpec.describe "tasks/index", type: :view do
   let(:tasks_collection) do
     [
-      { 
-        "content" => "Buy Groceries", 
-        "priority" => 4, 
-        "due" => { "string" => "2026-03-24" } 
+      {
+        "content" => "Buy Groceries",
+        "priority" => 4,
+        "due" => { "string" => "2026-03-24" }
       },
-      { 
-        "content" => "Call Mom", 
-        "priority" => 1, 
-        "due" => nil 
+      {
+        "content" => "Call Mom",
+        "priority" => 1,
+        "due" => nil
       }
     ]
   end
@@ -26,7 +26,7 @@ RSpec.describe "tasks/index", type: :view do
       expect(rendered).to have_content("Buy Groceries")
       expect(rendered).to have_content("2026-03-24")
       expect(rendered).to have_content("P4")
-      
+
       expect(rendered).to have_content("Call Mom")
       expect(rendered).to have_content("No date")
       expect(rendered).to have_content("P1")
