@@ -1,8 +1,10 @@
 class SessionsController < ApplicationController
   def create_developer_session
-    user = User.find_or_create_by!(email: "dev@example.com") do |u|
-      u.password = "Password123"
-      u.password_confirmation = "Password123"
+    dev_email = ENV.fetch("DEV_EMAIL")
+    dev_password = ENV.fetch("DEV_PASSWORD")
+    user = User.find_or_create_by!(email: dev_email) do |u|
+      u.password = dev_password
+      u.password_confirmation = dev_password
     end
 
     if user
