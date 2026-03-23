@@ -26,7 +26,7 @@
   <div class="card" style="padding: 20px;">
     <h3>Todoist Integration</h3>
 
-    <% if current_user.todoist_access_token.present? %>
+    <% if current_user && current_user.todoist_access_token.present? %>
       <p style="color: #2e7d32;">
         <strong>Status:</strong> Connected 
         <span style="font-size: 0.8rem; color: #666;">(Token present)</span>

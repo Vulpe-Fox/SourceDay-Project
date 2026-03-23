@@ -1,38 +1,40 @@
 <div class="container">
-  <h1>Todoist Tasks</h1>
+  <div class="header-flex" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <h1>Todoist Tasks</h1>
+  </div>
 
-  <section style="margin-bottom: 20px; padding: 15px; border: 1px solid #ddd;">
-  <h3>Create New Task</h3>
-  <%= form_with url: tasks_path, method: :post do |f| %>
-    <div>
-    <%= f.label :content, "What needs to be done?" %>
-    <%= f.text_field :content, placeholder: "e.g., Finish the Allen's Briefing", required: true %>
-    <%= f.submit "Add Task" %>
-    </div>
-  <% end %>
+  <section class="card">
+    <h3>Create New Task</h3>
+    <%= form_with url: tasks_path, method: :post, class: "modern-form" do |f| %>
+      <div style="display: flex; gap: 10px;">
+        <%= f.text_field :content, placeholder: "What needs to be done?", required: true, style: "flex-grow: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px;" %>
+        <%= f.submit "Add Task", class: "btn btn-success" %>
+      </div>
+    <% end %>
   </section>
 
-  <hr>
-  <table>
-    <thead>
-      <tr>
-        <th>Task Content</th>
-        <th>Due Date</th>
-        <th>Priority</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% if @tasks.any? %>
-      <% @tasks.each do |task| %>
+  <div style="margin-top: 2rem;">
+    <table class="task-table">
+      <thead>
         <tr>
-          <td><%= task["content"] %></td>
-          <td><%= task.dig("deadline", "string") || "No date" %></td>
-          <td>Priority <%= task["priority"] %></td>
+          <th>Task Content</th>
+          <th>Due Date</th>
+          <th>Priority</th>
         </tr>
-      <% end %>
-      <% else %>
-      <tr><td colspan="3">No tasks found.</td></tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% if @tasks.any? %>
+          <% @tasks.each do |task| %>
+            <tr>
+              <td><strong><%= task["content"] %></strong></td>
+              <td><span style="color: #666;"><%= task.dig("deadline", "string") || "No date" %></span></td>
+              <td><span class="priority-label">P<%= task["priority"] %></span></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr><td colspan="3" style="text-align: center;">No tasks found.</td></tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
