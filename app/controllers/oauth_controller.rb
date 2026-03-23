@@ -37,7 +37,7 @@ class OauthController < ApplicationController
       result = @service.exchange_code(params[:code])
       # Save to user model
       if current_user.update!(todoist_access_token: result["access_token"])
-        redirect_to dashboard_path, notice: t("todoist_access_response.success")
+        redirect_to tasks_path, notice: t("todoist_access_response.success")
       else
         redirect_to root_path, alert: t("todoist_access_response.failure")
       end

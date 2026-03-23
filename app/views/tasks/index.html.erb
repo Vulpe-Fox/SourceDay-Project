@@ -1,13 +1,35 @@
 <div class="container">
-  <div class="header-flex" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+  <div class="header-flex" style="margin-bottom: 2rem;">
     <h1>Todoist Tasks</h1>
   </div>
 
   <section class="card">
     <h3>Create New Task</h3>
-    <%= form_with url: tasks_path, method: :post, class: "modern-form" do |f| %>
-      <div style="display: flex; gap: 10px;">
-        <%= f.text_field :content, placeholder: "What needs to be done?", required: true, style: "flex-grow: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px;" %>
+    <%= form_with url: tasks_path, method: :post, class: "modern-form", html: { autocomplete: "off" } do |f| %>
+      <div class="form-row">
+        <div class="form-group flex-grow">
+        <%= f.label :content, "Task Name" %>
+        <%= f.text_field :content, 
+            value: params[:content], 
+            placeholder: "What needs to be done?", 
+            class: "form-input" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :due_date, "Deadline" %>
+          <%= f.date_field :due_date, 
+              value: params[:due_date], 
+              class: "form-input" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :priority, "Priority" %>
+          <%= f.select :priority, 
+              [["P1 (Low)", 1], ["P2", 2], ["P3", 3], ["P4 (High)", 4]], 
+              { selected: params[:priority] || 1 }, 
+              { class: "form-input" } %>
+        </div>
+
         <%= f.submit "Add Task", class: "btn btn-success" %>
       </div>
     <% end %>
@@ -27,7 +49,7 @@
           <% @tasks.each do |task| %>
             <tr>
               <td><strong><%= task["content"] %></strong></td>
-              <td><span style="color: #666;"><%= task.dig("deadline", "string") || "No date" %></span></td>
+              <td><span style="color: #666;"><%= task.dig("due", "string") || "No date" %></span></td>
               <td><span class="priority-label">P<%= task["priority"] %></span></td>
             </tr>
           <% end %>

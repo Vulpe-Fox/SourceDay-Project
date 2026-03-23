@@ -12,7 +12,7 @@
     <nav>
       <%= link_to "Home", root_path %>
       <% if current_user %>
-        <%= link_to "Dashboard", dashboard_path %>
+        <!--%= link_to "Dashboard", dashboard_path %-->
         <%= link_to "My Tasks", tasks_path %>
         <% if current_user.todoist_access_token.present? %>
           <span class="status-badge status-connected">✓ Todoist Linked</span>
