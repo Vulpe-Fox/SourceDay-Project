@@ -88,7 +88,20 @@ jobs:
           RAILS_ENV: test
           # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           # REDIS_URL: redis://localhost:6379/0
+          DEV_EMAIL: ${{ secrets.DEV_EMAIL }}
+          DEV_PASSWORD: ${{ secrets.DEV_PASSWORD }}
+          DEFAULT_PROJECT_NAME: ${{ secrets.DEFAULT_PROJECT_NAME }}
         run: bin/rails db:test:prepare test
+
+      - name: Run respec tests
+        env:
+          RAILS_ENV: test
+          # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          # REDIS_URL: redis://localhost:6379/0
+          DEV_EMAIL: ${{ secrets.DEV_EMAIL }}
+          DEV_PASSWORD: ${{ secrets.DEV_PASSWORD }}
+          DEFAULT_PROJECT_NAME: ${{ secrets.DEFAULT_PROJECT_NAME }}
+        run: bundle exec rspec
 
   system-test:
     runs-on: ubuntu-latest
