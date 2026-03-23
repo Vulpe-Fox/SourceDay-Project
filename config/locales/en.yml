@@ -29,7 +29,11 @@
 
 en:
   sessions:
+    signup:
+      password_invalid: "Password must include at least one capital letter and one special character."
     login_required: "Please sign in first."
+    login_success: "Successfully logged in."
+    login_failure: "Something went wrong."
     state_mismatch: "State does not match."
     logged_out_success: "Logged out successfully."
     developer_no_users: "No users found in database."
