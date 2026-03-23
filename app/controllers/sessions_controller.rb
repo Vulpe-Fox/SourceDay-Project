@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
     if user
       session[:user_id] = user.id
-      @current_user = user 
+      @current_user = user
       redirect_to root_path, notice: "Logged in as #{user.email} (Dev Mode)"
     else
       redirect_to root_path, alert: t("sessions.developer_no_users")

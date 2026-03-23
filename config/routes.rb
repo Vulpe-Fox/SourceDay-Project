@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get "auth/todoist", to: "oauth#connect", as: :todoist_connect
   get "auth/todoist/callback", to: "oauth#callback"
 
-  #get "dashboard", to: "dashboard#index", as: :dashboard
+  # get "dashboard", to: "dashboard#index", as: :dashboard
 
   post "login/developer_login", to: "sessions#create_developer_session", as: :dev_login
   delete "login/logout", to: "sessions#destroy", as: :logout
