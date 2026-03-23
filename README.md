@@ -54,40 +54,28 @@ TODOIST_VERIFICATION_TOKEN={verification token}
 
 &nbsp;&nbsp;4d. Set TODOIST_REDIRECT_URI in .env to http://localhost:3000/auth/todoist/callback, and copy that link into Todoist application OAuth redirect URL
 
-&nbsp;&nbsp;4e. Create a new Todoist project named Development Tasks
+&nbsp;&nbsp;4e. DEV_EMAIL, DEV_PASSWORD, and DEFAULT_PROJECT_NAME will be provided for ENV
 
-5. Run initial tests using rspec for sanity check
-```bash
-rspec
-```
+&nbsp;&nbsp;4f. Create a new Todoist project named Development Tasks
 
-6. Run the rails server in one terminal
+5. Run the rails server in one terminal
 ```bash
 bin/dev
 ```
 
-7. Run the rails console in another terminal
+6. Run the rails console in another terminal
 ```bash
 rails c
 ```
 
-8. In the rails console, create a temporary user
-```ruby
-User.create!(
-  email: "{name}@example.com",           
-  password: "Password123",
-  password_confirmation: "Password123"
-)
-```
+7. In the development environment, control click the opened port to open the dev webpage, click the login at the top right to sign in to the created development account
 
-9. In the development environment, click the login at the top right to sign in to the created development account
+8. In the top left or center of the screen, click the option to link Todoist
 
-10. In the top left or center of the screen, click the option to link Todoist
+9. Follow through the OAuth authorization flow
 
-11. Follow through the OAuth authorization flow
+10. You may now add tasks via the My Tasks view
 
-12. In the top left, click on My Tasks, you may now add tasks via the view
-
-13. Should you need to reauthenticate or change scopes, the home menu has an option to reconnect Todoist
+11. Should you need to reauthenticate or change scopes, the home menu has an option to reconnect Todoist; Browse-dependent, restarting the dev server may cause an incorrect state as cookies are saved weirdly sometimes.
 
 
