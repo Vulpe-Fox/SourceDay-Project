@@ -23,12 +23,12 @@ class TasksController < ApplicationController
     else
       set_tasks
       flash.now[:alert] = t("todoist_task_create_response.empty")
-      render :index, status: :unprocessable_entity
+      render :index, status: :unprocessable_content
     end
   rescue StandardError => e
     set_tasks
     flash.now[:alert] = "Failed to create task: #{e.message}"
-    render :index, status: :unprocessable_entity
+    render :index, status: :unprocessable_content
   end
 
   private
