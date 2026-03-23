@@ -23,26 +23,28 @@
     <% end %>
   </div>
 
-  <div class="card" style="padding: 20px;">
-    <h3>Todoist Integration</h3>
+  <% if current_user %>
+    <div class="card" style="padding: 20px;">
+      <h3>Todoist Integration</h3>
 
-    <% if current_user && current_user.todoist_access_token.present? %>
-      <p style="color: #2e7d32;">
-        <strong>Status:</strong> Connected 
-        <span style="font-size: 0.8rem; color: #666;">(Token present)</span>
-      </p>
-      
-      <p>Need to refresh your permissions or fix a connection error?</p>
-      <%= link_to "Reconnect Todoist", todoist_connect_path, 
-          class: "button", 
-          style: "background: #777; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block;" %>
-    <% else %>
-      <p style="color: #d32f2f;"><strong>Status:</strong> Not Connected</p>
-      <p>Link your account to start pulling in your tasks.</p>
-      <%= link_to "Connect Todoist", todoist_connect_path, 
-          class: "button", 
-          style: "background: #e44332; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;" %>
-    <% end %>
-  </div>
+      <% if current_user.todoist_access_token.present? %>
+        <p style="color: #2e7d32;">
+          <strong>Status:</strong> Connected 
+          <span style="font-size: 0.8rem; color: #666;">(Token present)</span>
+        </p>
+        
+        <p>Need to refresh your permissions or fix a connection error?</p>
+        <%= link_to "Reconnect Todoist", todoist_connect_path, 
+            class: "button", 
+            style: "background: #777; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block;" %>
+      <% else %>
+        <p style="color: #d32f2f;"><strong>Status:</strong> Not Connected</p>
+        <p>Link your account to start pulling in your tasks.</p>
+        <%= link_to "Connect Todoist", todoist_connect_path, 
+            class: "button", 
+            style: "background: #e44332; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;" %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 

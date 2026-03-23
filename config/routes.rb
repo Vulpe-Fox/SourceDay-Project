@@ -13,8 +13,8 @@ Rails.application.routes.draw do
 
   get "dashboard", to: "dashboard#index", as: :dashboard
 
-  post "login_as_first_user", to: "sessions#create_developer_session", as: :dev_login
-  delete "logout", to: "sessions#destroy", as: :logout
+  post "login/developer_login", to: "sessions#create_developer_session", as: :dev_login
+  delete "login/logout", to: "sessions#destroy", as: :logout
 
   resources :tasks, only: [ :index, :create ]
 end
