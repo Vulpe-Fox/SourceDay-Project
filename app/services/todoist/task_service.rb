@@ -25,23 +25,10 @@ module Todoist
       response.success? ? response.parsed_response["results"] : []
     end
 
-    def create_task(task_content)
+    def create_task(attributes = {})
       options = {
         headers: @headers,
-        body: {
-          content: task_content
-        }.to_json
-      }
-      self.class.post("/tasks", options)
-    end
-
-    def create_task_in_project(project_id, task_content)
-      options = {
-        headers: @headers,
-        body: {
-          content: task_content,
-          project_id: project_id
-        }.to_json
+        body: attributes.to_json
       }
       self.class.post("/tasks", options)
     end
