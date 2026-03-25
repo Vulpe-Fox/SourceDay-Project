@@ -11,6 +11,7 @@ module Todoist
       @client_id = ENV["TODOIST_CLIENT_ID"]
       @client_secret = ENV["TODOIST_CLIENT_SECRET"]
       @verification_token = ENV["TODOIST_VERIFICATION_TOKEN"]
+      @redirect_uri = ENV["TODOIST_REDIRECT_URI"]
     end
 
     # generate auth url (step 1 in auth flow)
@@ -20,7 +21,7 @@ module Todoist
         scope: scopes.join(","),
         state: state,
         response_type: "code",
-        redirect_uri: "http://localhost:3000/auth/todoist/callback"
+        redirect_uri: @redirect_uri
       }
       "#{AUTH_URL}?#{params.to_query}"
     end
